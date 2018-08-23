@@ -5,12 +5,14 @@
  */
 package comparar;
 
+import org.jfree.data.xy.XYDataItem;
+
 /**
  *
  * @author izacc
  */
 public class forzar {
-    private int valor;
+    private int iteraciones;
     private BubujaOptimizado bo;
     private Burbuja b;
     private QuickSort q;
@@ -18,55 +20,56 @@ public class forzar {
     private double[] tiempos;
     private double[] tiempos2;
     private double[] tiempos3;
-    private Graficar g;
+    
     public forzar(int valor,int tam ,Burbuja b, BubujaOptimizado bo, QuickSort q){
-        this.valor = valor;
+        this.iteraciones = valor;
         this.b = b;
         this.bo = bo;
         this.q = q;
         this.tam = tam;
-        g = new Graficar("Iteracion","Tiempo","Comparacion");
+       
     }
     
     public void comparar(int opc){
-        this.tiempos = new double[tam];
-        this.tiempos2 = new double[tam];
-        this.tiempos3 = new double[tam];
         
-        g.agrearSerie("B");
-        g.agrearSerie("BO");
-        g.agrearSerie("Q");
+        Graficar g = new Graficar("Iteracion","Tiempo","Comparacion");
         
-        for(int x = 0 ; x < valor ; x++){
-            switch(opc){
-                case 1 :{ //mejor
-                    b.ordenar(herramientas.generarDatosOrdenadosAsendendentes(tam));
-                    tiempos[x]=b.getTiempo_total();
-                    bo.ordenar(herramientas.generarDatosOrdenadosAsendendentes(tam));
-                    tiempos2[x]=bo.getTiempo_total();
-                    q.ordenar(herramientas.generarDatosOrdenadosAsendendentes(tam));
-                    tiempos3[x]=q.getTiempo_total();      
-                    break;
+        for(int x = 0 ; x<3 ; x++){
+            g.agrearSerie("serie "+x);
+        }
+        
+        for(int x = 0 ; x<this.iteraciones ; x++){
+            double[] arreglo = new double[tam];
+                switch(opc){
+                    case 1:{ //mejor
+                        arreglo = herramientas.generarDatosOrdenadosAsendendentes(tam);
+                        break;
+                    }
+                    case 2:{ //aleatorio
+                        arreglo = herramientas.generarDatosOrdenadosDesendentemente(tam);
+                        break;
+                    }
+                    case 3:{ //peor
+                        arreglo = herramientas.datos(tam);
+                        break;
+                    }
                 }
-                case 2 :{ //peor
-                    b.ordenar(herramientas.generarDatosOrdenadosDesendentemente(tam));
-                    tiempos[x]=b.getTiempo_total();
-                    bo.ordenar(herramientas.generarDatosOrdenadosDesendentemente(tam));
-                    tiempos2[x]=bo.getTiempo_total();
-                    q.ordenar(herramientas.generarDatosOrdenadosDesendentemente(tam));
-                    tiempos3[x]=q.getTiempo_total();
-                    break;
-                }
-                case 3 :{ //aleatorio
-                    b.ordenar(herramientas.datos(tam));
-                    tiempos[x]=b.getTiempo_total();
-                    bo.ordenar(herramientas.datos(tam));
-                    tiempos2[x]=bo.getTiempo_total();
-                    q.ordenar(herramientas.datos(tam));
-                    tiempos3[x]=q.getTiempo_total();
-                    break;
+            for(int y = 0 ; y<3 ; y++){
+                if(y==0){
+                    b.ordenar(arreglo.clone());
+                    double tiempo = b.getTiempo_total();
+                    g.agregarDatoASerie("serie "+y,new XYDataItem(x, tiempo));
+                }else if(y==1){
+                    bo.ordenar(arreglo.clone());
+                    double tiempo = bo.getTiempo_total();
+                    g.agregarDatoASerie("serie "+y,new XYDataItem(x, tiempo));
+                }if(y==2){
+                    q.ordenar(arreglo.clone());
+                    double tiempo = q.getTiempo_total();
+                    g.agregarDatoASerie("serie "+y,new XYDataItem(x, tiempo));
                 }
             }
         }
+        g.crearYmostrarGrafica();
     }
 }

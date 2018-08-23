@@ -29,7 +29,7 @@ public class BubujaOptimizado {
         this.tiempoInicio = System.currentTimeMillis();
     
           for(int i = arreglo.length-1; i >0 ; i--)    // 5n(5n(15))= (75n)(5n) = 375n2
-            { 
+           { 
             for(int j = 0; j < i; j++)  //5n(15)
                  {
                    this.comparaciones++; //2

@@ -19,8 +19,12 @@ public class main {
         BubujaOptimizado bo = new BubujaOptimizado();
         QuickSort q = new QuickSort();
         
-        int num = 100000;
-
+        int iteraciones = 100;
+        int tam = 10000;
+        
+        forzar f = new forzar(iteraciones,tam,b,bo,q);
+        f.comparar(3);
+        
     }
     
 }
