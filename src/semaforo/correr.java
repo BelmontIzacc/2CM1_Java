@@ -3,28 +3,26 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package comparar;
+package semaforo;
 
 /**
  *
  * @author izacc
  */
-public class main {
+public class correr {
 
     /**
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        Burbuja b = new Burbuja();
-        BubujaOptimizado bo = new BubujaOptimizado();
-        QuickSort q = new QuickSort();
+        // TODO code application logic here
+        Semaforo s = new Semaforo();
+        fabrica f = new fabrica();
+        calle c = new calle(s,f);
         
-        int iteraciones = 100;
-        int tam = 1000;
-        
-        forzar f = new forzar(iteraciones,tam,b,bo,q);
-        f.comparar(3);
-        
+        s.start();
+        f.start();
+        c.start();
     }
     
 }

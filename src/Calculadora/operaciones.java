@@ -47,6 +47,18 @@ public class operaciones {
         return Math.pow(n,m);
     }
     
+    public double raiz(double n){
+        return Math.sqrt(n);
+    }
+    
+    public double exponencial(double n) {
+        return Math.exp(n);
+    }
+    
+    public double logaritmo(double n) {
+        return Math.log(n);
+    }
+    
     private double ran(){
        Random r = new Random();
         double n =  r.nextInt(11)+2;
