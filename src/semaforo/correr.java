@@ -21,7 +21,6 @@ public class correr {
         calle c = new calle(s,f);
         
         s.start();
-        f.start();
         c.start();
     }
     

@@ -7,16 +7,18 @@ package semaforo;
 
 import java.util.ArrayList;
 import java.util.concurrent.ThreadLocalRandom;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
  * @author izacc
  */
-public class fabrica extends Thread{
+public class fabrica{
     public int tam;
     public ArrayList<carro> c;
-    public int crear;
-            
+    private int crear;
+    
     public fabrica(){
         this.c = new ArrayList<>();
         crear =0;
@@ -24,20 +26,18 @@ public class fabrica extends Thread{
         // 1 para crear;
     }
 
-    @Override
-    public void run() {
-        while(true){
-            if(crear==1){
-                this.tam = ThreadLocalRandom.current().nextInt(1, 11);
+    public void rune(){
+            if(this.getCrear()==1){
+                System.out.println(""+this.getCrear());
+                this.tam = ThreadLocalRandom.current().nextInt(3, 11);
                 System.out.println("Cantidad de carros formados : "+tam);
                 for(int x = 0 ; x < this.tam ; x++){
                     c.add(new carro(x));
                 }
-                crear=0;
+                setCrear(0);
             }
-        }
     }
-
+    
     public ArrayList<carro> getC() {
         return c;
     }
@@ -46,11 +46,17 @@ public class fabrica extends Thread{
         this.c = c;
     }
 
-    public int getCrear() {
-        return crear;
-    }
+    
 
     public void setCrear(int crear) {
+        System.out.println(""+crear);
         this.crear = crear;
+    }
+
+    /**
+     * @return the crear
+     */
+    public int getCrear() {
+        return crear;
     }
 }

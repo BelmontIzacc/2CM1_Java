@@ -14,40 +14,52 @@ import java.util.logging.Logger;
  * @author izacc
  */
 public class Semaforo extends Thread{
-    public int estado;
+    private int estado;
     // verde = 1
     // rojo = 0
     public Semaforo(){
-        estado=0;
+        this.estado=0;
     }
 
     @Override
     public void run() {
         while(true){
             int aux;
-           if(estado==0){
-               aux = ThreadLocalRandom.current().nextInt(5,11);
-               esperarXsegundos(aux);
-               estado=1;
+           if(getEstado()==0){
                System.out.println("EN ROJO");
-           }else if(estado==1){
-               aux = ThreadLocalRandom.current().nextInt(5, 11);
+               aux = ThreadLocalRandom.current().nextInt(10,16);
                esperarXsegundos(aux);
-               estado=0;
+               System.out.println("Se cambio a VERDE");
+               setEstado(1);
+           }else if(getEstado()==1){
                System.out.println("EN VERDE");
+               aux = ThreadLocalRandom.current().nextInt(10, 16);
+               esperarXsegundos(aux);
+               System.out.println("Se cambio a ROJO");
+               setEstado(0);
            }
         }
     }
     
     public void esperarXsegundos(int num){
         try {
-            this.sleep(num*1000);
+            Semaforo.sleep(num*1000);
         } catch (InterruptedException ex) {
             Logger.getLogger(Semaforo.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
-    public int getEstado(){
+
+    /**
+     * @return the estado
+     */
+    public int getEstado() {
         return estado;
+    }
+
+    /**
+     * @param estado the estado to set
+     */
+    public void setEstado(int estado) {
+        this.estado = estado;
     }
 }
