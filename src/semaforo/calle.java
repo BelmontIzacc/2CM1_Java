@@ -27,9 +27,8 @@ public class calle extends Thread{
     public void run() {
         while(true){
             if(!f.getC().isEmpty()){
-                System.out.println("Esta lleno");
-                    boolean sigue = true;
-                    while(sigue){
+                //System.out.println("Esta lleno");
+                    System.out.println(""+s.getEstado());
                         if(s.getEstado()==1){
                             System.out.println(f.getC().get(0).toString());
                             int tiempo = 0;
@@ -45,27 +44,25 @@ public class calle extends Thread{
                                     break;
                                 }
                                 case 2:{
-                                    tiempo = 7;
+                                    tiempo = 6;
                                     //camioneta
                                 }
                             }
                             esperarXsegundos(tiempo);
                             f.getC().remove(0);
-                            if(f.getC().isEmpty()){
-                               sigue = false; 
-                            }
+                            System.out.println("Se a removido el automovil");
                         }
-                    }
             }else{
-                System.out.println("Se crean carros");
+                //System.out.println("Se crean carros");
                 f.setCrear(1);
+                f.rune();
             }  
         }
     }
     
     public void esperarXsegundos(int num){
         try {
-            this.sleep(num*1000);
+            calle.sleep(num*1000);
         } catch (InterruptedException ex) {
             Logger.getLogger(Semaforo.class.getName()).log(Level.SEVERE, null, ex);
         }
