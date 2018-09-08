@@ -48,7 +48,12 @@ public class Semaforo extends Thread{
             Logger.getLogger(Semaforo.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-
+    
+    public void iniciar(){
+        this.setPriority(5);
+        this.start();
+    }
+    
     /**
      * @return the estado
      */

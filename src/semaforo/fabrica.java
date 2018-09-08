@@ -28,7 +28,7 @@ public class fabrica{
 
     public void rune(){
             if(this.getCrear()==1){
-                System.out.println(""+this.getCrear());
+                //System.out.println(""+this.getCrear());
                 this.tam = ThreadLocalRandom.current().nextInt(3, 11);
                 System.out.println("Cantidad de carros formados : "+tam);
                 for(int x = 0 ; x < this.tam ; x++){

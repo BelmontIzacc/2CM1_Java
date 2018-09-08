@@ -20,8 +20,8 @@ public class correr {
         fabrica f = new fabrica();
         calle c = new calle(s,f);
         
-        s.start();
-        c.start();
+        s.iniciar();
+        c.iniciar();
     }
     
 }

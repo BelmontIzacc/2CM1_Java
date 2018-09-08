@@ -28,7 +28,8 @@ public class calle extends Thread{
         while(true){
             if(!f.getC().isEmpty()){
                 //System.out.println("Esta lleno");
-                    System.out.println(""+s.getEstado());
+                    //System.out.println(""+s.getEstado());
+                    this.setPriority(MIN_PRIORITY);
                         if(s.getEstado()==1){
                             System.out.println(f.getC().get(0).toString());
                             int tiempo = 0;
@@ -58,6 +59,11 @@ public class calle extends Thread{
                 f.rune();
             }  
         }
+    }
+    
+    public void iniciar(){
+        this.setPriority(10);
+        this.start();
     }
     
     public void esperarXsegundos(int num){
