@@ -56,12 +56,20 @@ public class Graficar {
         ChartFrame frame = new ChartFrame("Gráfica Comparación ", grafica);
         frame.setSize(700, 250);
         frame.setVisible(true);
-        
-        
+
     }
     
+    public void crearYmostrarGrafica2(){
     
-            
-    
+        this.grafica = ChartFactory.createXYLineChart(titulo, ejeX, ejeY, series);
+        ChartFrame frame = new ChartFrame("Gráfica Comparación ", grafica);
+        //frame.setSize(700, 250);
+        //frame.setVisible(true);
+
+    }
+
+    public JFreeChart getGrafica() {
+        return grafica;
+    }  
     
 }
