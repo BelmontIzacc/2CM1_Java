@@ -34,9 +34,29 @@ public class usuario {
         this.CURP = CURP;
         
         this.nip = ""+ThreadLocalRandom.current().nextInt(1000, 4000); 
-        this.numeroTarjeta = ""+ThreadLocalRandom.current().nextInt(5000, 9000);  
+        this.numeroTarjeta = "";  
+        
+        m = new ArrayList<>();
     }
-
+    
+    public usuario(String nombre, double fondo) {
+        this.nombre = nombre;
+        this.apellidoP = "";
+        this.apellidoM = "";
+        this.direccion = "";
+        this.fondo = fondo;
+        this.CURP = "";
+        
+        this.nip = ""+ThreadLocalRandom.current().nextInt(1000, 4000); 
+        this.numeroTarjeta = "";  
+        
+         m = new ArrayList<>();
+    }
+    
+    public void registrarMovimiento(movimientos m){
+        this.m.add(m);
+    }
+    
     public double getFondo() {
         return fondo;
     }
@@ -76,6 +96,17 @@ public class usuario {
     public String getNumeroTarjeta() {
         return numeroTarjeta;
     }
+
+    public void setNumeroTarjeta(String numeroTarjeta) {
+        this.numeroTarjeta = numeroTarjeta;
+    }
+
+    @Override
+    public String toString() {
+        return "usuario{" + "nombre : " + nombre + ", fondo : " + fondo + ", nip : " + nip + ", numeroTarjeta : " + numeroTarjeta + '}';
+    }
+
+    
     
     
 }

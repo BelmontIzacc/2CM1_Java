@@ -6,6 +6,7 @@
 package Cajero;
 
 import java.util.ArrayList;
+import java.util.concurrent.ThreadLocalRandom;
 
 /**
  *
@@ -19,7 +20,18 @@ public class db_usuarios {
     }
     
     public void addUsuarios(usuario u){
+        String noTargeta = ""+ThreadLocalRandom.current().nextInt(4000, 9000);
+        for(int x = 0 ; x < this.listaUsuarios.size(); x++){
+             if(this.listaUsuarios.get(x).getNumeroTarjeta().equals(noTargeta)){
+                 noTargeta = ""+ThreadLocalRandom.current().nextInt(4000, 9000);
+                 x=0;
+             }else{
+                 
+             }
+        }
+        u.setNumeroTarjeta(noTargeta);
         this.listaUsuarios.add(u);
+        System.out.println("Se a guardado : "+this.listaUsuarios.get(this.listaUsuarios.size()-1).toString());
     }
     
     public usuario searchUser(String nT){
