@@ -40,4 +40,9 @@ public class movimientos {
     public double getMonto() {
         return monto;
     }
+
+    @Override
+    public String toString() {
+        return "" + " " + tipoMovimiento + ", fecha : " + fecha + ", hora " + hora + ", monto " + monto + ' ';
+    }
 }

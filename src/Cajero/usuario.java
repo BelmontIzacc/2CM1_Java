@@ -106,7 +106,8 @@ public class usuario {
         return "usuario{" + "nombre : " + nombre + ", fondo : " + fondo + ", nip : " + nip + ", numeroTarjeta : " + numeroTarjeta + '}';
     }
 
-    
-    
+    public ArrayList<movimientos> getM() {
+        return m;
+    } 
     
 }
