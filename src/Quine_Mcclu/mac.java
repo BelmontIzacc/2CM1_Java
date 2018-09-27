@@ -86,6 +86,7 @@ public class mac {
            }
         }
         
+        ArrayList<elemento> ccero_uno = new ArrayList<>();
         ArrayList<elemento> cuno_dos = new ArrayList<>();
         ArrayList<elemento> cdos_tres = new ArrayList<>();
         ArrayList<elemento> ctres_cuatro = new ArrayList<>();
@@ -100,6 +101,21 @@ public class mac {
 //            ii++;
 //            jj++;
 //        }
+        if(cero.size()>0){
+            for(int i = 0 ; i<uno.size();i++){
+                String c[] = new String[uno.get(i).getBit().length];
+                for(int j =0 ; j<uno.get(0).getBit().length ; j++){
+                    if(uno.get(i).getBit()[j].equals("1")){
+                        c[j]="X";
+                    }else{
+                        c[j]="0";
+                    }
+                }
+                elemento e = new elemento(c,"0,"+uno.get(i).getPosicionTabla());
+                ccero_uno.add(e);
+            }
+        }
+
 
         for(int i = 0 ; i<uno.size();i++){
             for(int j = 0 ; j<dos.size();j++){
@@ -193,14 +209,38 @@ public class mac {
             }
         }
         
+        ArrayList<elemento> ccero_uno_uno_dos = new ArrayList<>();
         ArrayList<elemento> cuno_dos_dos_tres = new ArrayList<>();
         ArrayList<elemento> cdos_tres_tres_cuatro = new ArrayList<>();
+        
+        if(cero.size()>0){
+            for(int x = 0 ; x < ccero_uno.size() ; x++){
+                for(int y = 0 ; y<cuno_dos.size() ; y++){
+                    if(ccero_uno.get(x).getPosicionX()[0]==cuno_dos.get(y).getPosicionX()[0]){ //recorrer posiciones en caso de tener mas X
+
+                        String[] aux = new String[uno.get(0).getBit().length];
+
+                        for(int q = 0 ; q<ccero_uno.get(0).getBit().length;q++){
+                            if(ccero_uno.get(x).getBit()[q].equals(cuno_dos.get(y).getBit()[q])){
+                                aux[q]=ccero_uno.get(x).getBit()[q];
+                            }else{
+                                aux[q]="X";
+                            }
+                        }
+                        ccero_uno.get(x).setMarca(1);
+                        cuno_dos.get(y).setMarca(1);
+                        elemento e = new elemento(aux,""+ccero_uno.get(x).getPosicionTabla()+","+cuno_dos.get(y).getPosicionTabla());
+                        ccero_uno_uno_dos.add(e);
+                    }
+                }
+            }
+        }
         
         for(int i = 0 ; i<cuno_dos.size();i++){
             for(int j = 0 ; j<cdos_tres.size();j++){
                 for(int y = 0 ; y<cuno_dos.get(i).getPosicionUX().length; y++){
                     for(int z = 0 ; z<cdos_tres.get(j).getPosicionUX().length;z++){
-                        if(cuno_dos.get(i).getPosicionX()[0]==cdos_tres.get(j).getPosicionX()[0]){
+                        if(cuno_dos.get(i).getPosicionX()[0]==cdos_tres.get(j).getPosicionX()[0]){ //recorrer posiciones en caso de tener mas X
                             if(cuno_dos.get(i).getPosicionUX()[y]==
                                     cdos_tres.get(j).getPosicionUX()[z]){
                                 c=2;
@@ -264,6 +304,14 @@ public class mac {
         
         ArrayList<elemento> cfinal = new ArrayList<>();
         
+        if(cero.size()>0){
+            for(int x = 0 ; x<ccero_uno.size();x++){
+                if(ccero_uno.get(x).getMarca()==0){
+                    cfinal.add(ccero_uno.get(x));
+                }
+            }
+        }
+        
         for(int x = 0 ; x<cuno_dos.size();x++){
             if(cuno_dos.get(x).getMarca()==0){
                 cfinal.add(cuno_dos.get(x));
@@ -279,6 +327,17 @@ public class mac {
         for(int x = 0 ; x<ctres_cuatro.size();x++){
             if(ctres_cuatro.get(x).getMarca()==0){
                 cfinal.add(ctres_cuatro.get(x));
+            }
+        }
+        
+        if(ccero_uno_uno_dos.size()>=2){
+            elemento aux = ccero_uno_uno_dos.get(0);
+            for(int x = 1 ; x<ccero_uno_uno_dos.size(); x++){
+                if(Arrays.equals(aux.getBit(), ccero_uno_uno_dos.get(x).getBit())){
+                    ccero_uno_uno_dos.remove(0);
+                    aux = ccero_uno_uno_dos.get(0);
+                    x=1;
+                }
             }
         }
         
@@ -303,7 +362,13 @@ public class mac {
                 }
             }
         }
-        
+      
+        if(cero.size()>0){
+            for(int x = 0 ; x<ccero_uno_uno_dos.size(); x++){
+                cfinal.add(ccero_uno_uno_dos.get(x));
+            }
+        }
+                
         for(int x = 0 ; x<cuno_dos_dos_tres.size(); x++){
             cfinal.add(cuno_dos_dos_tres.get(x));
         }
