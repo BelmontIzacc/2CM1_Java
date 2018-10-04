@@ -5,12 +5,27 @@
  */
 package Quine_Mcclu;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author izacc
  */
 public class interprete {
-    public static String convertir(String[] bit) {
+    
+    public static String mostrar(ArrayList<elemento> cfinal){
+        String resultado="";
+        for(int x = 0 ; x<cfinal.size();x++){
+            if(x==0){
+                resultado = resultado+interprete.convertir(cfinal.get(x).getBit());
+            }else{
+                resultado = resultado+"+"+interprete.convertir(cfinal.get(x).getBit());
+            }
+        }
+        return resultado;
+    }
+    
+    private static String convertir(String[] bit) {
         String aux=" ";
         for(int x = 0 ; x<bit.length;x++){
             aux=aux+letras(x,bit[x]);

@@ -74,7 +74,19 @@ public class elemento {
             }
         }
     }
-
+    
+    public String Bit(){
+        String aux="";
+        for(int x = 0 ; x<this.bit.length ; x++){
+            if(x==0){
+                aux = bit[x];
+            }else{
+                aux += bit[x];
+            }
+        }
+        return aux;
+    }
+    
     public String[] getBit() {
         return bit;
     }

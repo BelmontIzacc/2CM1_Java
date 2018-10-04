@@ -16,8 +16,8 @@ public class test {
      */
     public static void main(String[] args) {
         // TODO code application logic here
-        int min[] = new int[]{1,3,4,5,7,9,10,11,15};
-        
+        //int min[] = new int[]{0,1,2,3,4,7,9,10,13,14,15};
+        int min[] = new int[]{3,4,7,9,10};
         String v1[] = new String[]{"0","0","0","0"};
         String v2[] = new String[]{"0","0","0","1"};
         String v3[] = new String[]{"0","0","1","0"};
@@ -57,8 +57,12 @@ public class test {
         
         m.agrupacion();
         System.out.println("! -> significa negacion\nEjemplo : A! = A negada\n");
-        System.out.println("El resultado final es : "+m.getResultado());
-        System.out.println("\n\nFalta la parte de memo para minimizar todo lo posible, ahorita arroja todo el resultado tal cual");
+        System.out.println("El resultado final total : "+m.getResultado());
+        System.out.println("\nFalta la parte de memo para minimizar todo lo posible, ahorita arroja todo el resultado tal cual\n");
+        
+        Individuo.funcion = min;
+        GeneticoV1 g = new GeneticoV1(5,5,m.getResultadoLista());
+        g.evolucionar();
         System.out.println();
         
     }

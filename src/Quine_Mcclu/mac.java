@@ -18,6 +18,7 @@ public class mac {
     private int max;
     private int minterminos[];
     private ArrayList<elemento> tabla;
+    ArrayList<elemento> resultadoLista;
     private String resultado;
     
     public mac(int minterminos[]){
@@ -377,17 +378,16 @@ public class mac {
             cfinal.add(cdos_tres_tres_cuatro.get(x));
         }
         
-        for(int x = 0 ; x<cfinal.size();x++){
-            if(x==0){
-                this.resultado = this.resultado+interprete.convertir(cfinal.get(x).getBit());
-            }else{
-                this.resultado = this.resultado+"+"+interprete.convertir(cfinal.get(x).getBit());
-            }
-        }
+        resultadoLista = cfinal;
+        this.resultado = interprete.mostrar(cfinal);
     }
 
     public String getResultado() {
         return resultado;
+    }
+
+    public ArrayList<elemento> getResultadoLista() {
+        return resultadoLista;
     }
     
 }
