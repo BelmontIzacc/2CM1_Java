@@ -389,5 +389,9 @@ public class mac {
     public ArrayList<elemento> getResultadoLista() {
         return resultadoLista;
     }
+
+    public int[] getMinterminos() {
+        return minterminos;
+    }
     
 }
