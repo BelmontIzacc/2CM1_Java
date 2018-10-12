@@ -32,6 +32,8 @@ public class peor {
         
         if(p.getTamaño()<tam && listaProcesos.isEmpty()){
             
+            System.out.println("Se agrega: "+p.getNombre()+" de tamaño: "+p.getTamaño());
+            
             p.setPosInicio(0);
             p.setPosFinal(p.getTamaño()-1);
             listaProcesos.add(p);
@@ -91,6 +93,8 @@ public class peor {
                     posiciones[x]=""+p.getNombre();
                 }
                 
+                System.out.println("Se agrega: "+p.getNombre()+" de tamaño: "+p.getTamaño());
+                
                 p.setPosInicio(inicio);
                 p.setPosFinal(stop-1);
                 listaProcesos.add(p);
@@ -103,6 +107,7 @@ public class peor {
         for(int x = 0 ; x<this.listaProcesos.size() ; x++){
             if(this.listaProcesos.get(x).getNombre().equals(ident)){
                 resultante = resultante+this.listaProcesos.get(x).getTamaño();
+                System.out.println("Se elimina: "+ident+" de tamaño: "+this.listaProcesos.get(x).getTamaño());
                 this.listaProcesos.remove(x);
             }
         }
@@ -112,5 +117,17 @@ public class peor {
                this.posiciones[x]="-"; 
             }
         }
+    }
+    
+    public String toString(){
+        String aux="";
+        for(int x = 0 ; x<this.posiciones.length ; x++){
+            if(x==0){
+                aux=this.posiciones[x];
+            }else{
+                aux+=","+this.posiciones[x];
+            }
+        }
+        return aux;
     }
 }
