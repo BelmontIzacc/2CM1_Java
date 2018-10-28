@@ -64,5 +64,80 @@ public class GeneticoV1 {
        
     }
 
+    public void evolucionar(int selec, int muta, int cruza) {
+       Poblacion nuevaPoblacion; 
+       //this.pobActual.calcularMayorMenor();
+       // agregar el ciclo para las generaciones 
+       for(int g=0; g<this.numGeneraciones;g++){
+          // proceso iterativo de construccion de la
+          // nueva población
+          nuevaPoblacion = new Poblacion();
+          int cantidad = (int)(tamPob*muestra)/100;
+          nuevaPoblacion.recibirMuetra(this.pobActual.generarMejores(cantidad));
+          for(int i=cantidad;i<this.tamPob;i++){
+          
+              // seleccionar a una madre y un padre
+              Individuo madre = null;
+              Individuo padre = null;
+              switch(selec){
+                  case 1: {
+                      madre = seleccion.seleccionAleatoria(pobActual);
+                      padre = seleccion.seleccionAleatoria(pobActual);
+                      break;
+                  }
+                  case 2: {
+                      madre = seleccion.TorneoKL(pobActual);
+                      padre = seleccion.TorneoKL(pobActual);
+                      break;
+                  }
+                  case 3: {
+                      madre = seleccion.seleccionTorneoMax(pobActual);
+                      padre = seleccion.seleccionTorneoMax(pobActual);
+                      break;
+                  }
+              }
+          
+
+          // cruza
+          int n = ThreadLocalRandom.current().nextInt(1,101)/100;
+          Individuo nuevoi =  null;
+          switch(cruza){
+                  case 1: {
+                      nuevoi = Cruza.cruzaBinaria(new int[]{1,0,1,0,1,0,1,0,1,0,1,0,1,1,1},madre, padre);
+                      break;
+                  }
+                  case 2: {
+                      nuevoi = Cruza.cruzaAND(madre, padre);
+                      break;
+                  }
+                  case 3: {
+                      nuevoi = Cruza.cruzaOR(madre, padre);
+                      break;
+                  }
+          }
+          
+          if(n>this.probabilidadMuta) {
+              switch(muta){
+                  case 1:{
+                      nuevoi = Muta.Muta2puntos(nuevoi);
+                      break;
+                  }
+              }
+          }
+          // agregamos el individuo a la nueva poblacion
+              nuevaPoblacion.getIndividuos().add(nuevoi);
+          }
+       // actualizamos la población actual 
+       this.pobActual = new Poblacion(nuevaPoblacion);
+     
+       }
+
+       System.out.println("Mejor: "+this.pobActual.getMayor().getFitness());
+    }
+
+    public Genetico.Poblacion getPobActual() {
+        return pobActual;
+    }
+
     
 }
